@@ -58,7 +58,7 @@
         content:"";
         position:absolute;
         inset:0;
-        opacity:0.5;
+        opacity:0.05;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         mix-blend-mode: overlay;
     }
@@ -173,7 +173,7 @@
         color: var(--tile-glow, var(--text-dim));
         text-align: center;
         padding: 0 8px;
-        line-height: 1.2;
+        line-height: 1.2rem;
         user-select: none;
     }
     .shortcut-key {
@@ -184,8 +184,10 @@
         text-align: center;
         border-radius: 4px;
         font-family: monospace;
-        bottom: 0.5rem;
         position: absolute;
+        bottom: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
     }
     </style>
 </head>
@@ -329,7 +331,7 @@
             if (e.key === 'Enter') {
                 searchbar.value = searchbar.value.trim();
                 if (searchbar.value !== ''){
-                    window.location = `https://search.brave.com/search?q=${searchbar.value}`;
+                    window.location = `https://search.brave.com/search?q=${encodeURIComponent(searchbar.value)}`;
                 }
             }
             if (e.key === 'Escape') {
