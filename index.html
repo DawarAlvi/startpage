@@ -1,606 +1,888 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Start</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --bg: #0a0c11;
-        --surface: rgba(255, 255, 255, 0.045);
-        --surface-hover: rgba(255, 255, 255, 0.075);
-        --border: rgba(255, 255, 255, 0.09);
-        --text: #e9e7e1;
-        --text-dim: #868999;
-        --text-dim2: #7d8089;
-        --teal: #5fa8a0;
-        --plum: #9182b3;
-        --rust: #c1815a;
-        --gold: #cfae7c;
-        --slate: #7c93ad;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        background: var(--bg);
-        color: var(--text);
-        font-family:
-          "Inter",
-          -apple-system,
-          sans-serif;
-        min-height: 100vh;
-        overflow-x: hidden;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .bg {
-        position: fixed;
-        inset: 0;
-        z-index: -2;
-        background: var(--bg);
-        overflow: hidden;
-      }
-      .bg::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(
-            ellipse 60% 45% at 18% 20%,
-            rgba(95, 168, 160, 0.3),
-            transparent 60%
-          ),
-          radial-gradient(
-            ellipse 55% 50% at 85% 15%,
-            rgba(145, 130, 179, 0.26),
-            transparent 60%
-          ),
-          radial-gradient(
-            ellipse 60% 55% at 75% 88%,
-            rgba(193, 129, 90, 0.2),
-            transparent 60%
-          ),
-          radial-gradient(
-            ellipse 50% 45% at 10% 90%,
-            rgba(124, 147, 173, 0.2),
-            transparent 60%
-          );
-        filter: blur(100px) saturate(120%);
-        transform: scale(1.15);
-      }
-      .bg::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        opacity: 0.05;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        mix-blend-mode: overlay;
-      }
-      .wrap {
-        width: 100%;
-        max-width: 620px;
-        padding: 8vh 24px 10vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .clock {
-        font-family: "Space Grotesk", sans-serif;
-        font-weight: 300;
-        font-size: clamp(4.2rem, 13vw, 7.6rem);
-        line-height: 1;
-        letter-spacing: -0.02em;
-        font-variant-numeric: tabular-nums;
-        color: var(--text);
-        text-align: center;
-        user-select: none;
-      }
-      .clock .colon {
-        display: inline-block;
-        color: var(--slate);
-        animation: blink 2s steps(1) infinite;
-      }
-      .date {
-        margin-top: 14px;
-        font-size: 0.8rem;
-        font-weight: 500;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: #9a9ca6;
-        text-align: center;
-      }
-      .divider {
-        width: 80px;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0c11;
+      --surface: rgba(255, 255, 255, 0.045);
+      --surface-hover: rgba(255, 255, 255, 0.075);
+      --border: rgba(255, 255, 255, 0.09);
+      --text: #e9e7e1;
+      --text-dim: #868999;
+      --text-dim2: #7d8089;
+      --teal: #5fa8a0;
+      --plum: #9182b3;
+      --rust: #c1815a;
+      --gold: #cfae7c;
+      --slate: #7c93ad;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        "Inter",
+        -apple-system,
+        sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    .bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 45% at 18% 20%,
+          rgba(95, 168, 160, 0.3),
+          transparent 60%),
+        radial-gradient(ellipse 55% 50% at 85% 15%,
+          rgba(145, 130, 179, 0.26),
+          transparent 60%),
+        radial-gradient(ellipse 60% 55% at 75% 88%,
+          rgba(193, 129, 90, 0.2),
+          transparent 60%),
+        radial-gradient(ellipse 50% 45% at 10% 90%,
+          rgba(124, 147, 173, 0.2),
+          transparent 60%);
+      filter: blur(100px) saturate(120%);
+      transform: scale(1.15);
+    }
+
+    .bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 620px;
+      padding: 8vh 24px 10vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .clock {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 300;
+      font-size: clamp(4.2rem, 13vw, 7.6rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+      text-align: center;
+      user-select: none;
+    }
+
+    .clock .colon {
+      display: inline-block;
+      color: var(--slate);
+      animation: blink 2s steps(1) infinite;
+    }
+
+    .date {
+      margin-top: 14px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9a9ca6;
+      text-align: center;
+    }
+
+    .divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg,
           transparent,
           var(--border),
-          transparent
-        );
-        margin: 44px 0 40px;
-      }
-      .search {
-        padding: 0 1rem;
-        min-width: 36rem;
-        border-radius: 6px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        color: white;
-        font-size: 1.4rem;
-        line-height: 3rem;
-      }
-      .search:focus {
-        outline: none;
-        border-color: rgba(193, 129, 90, 0.55);
-        box-shadow: 0 10px 28px -8px rgba(193, 129, 90, 0.25);
-      }
-      .grid {
-        margin-top: 1rem;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        width: 100%;
-      }
-      .tile {
-        position: relative;
-        aspect-ratio: 1 / 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border-radius: 20px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        backdrop-filter: blur(18px) saturate(140%);
-        -webkit-backdrop-filter: blur(18px) saturate(140%);
-        cursor: pointer;
-        text-decoration: none;
-        transition:
-          transform 0.22s ease,
-          background 0.22s ease,
-          border-color 0.22s ease,
-          box-shadow 0.22s ease;
-      }
-      .tile svg,
-      .tile img {
-        width: 42%;
-        height: 42%;
-        transition: transform 0.22s ease;
-        filter: invert(0.1) saturate(0.8);
-      }
-      .invert {
-        filter: invert(1) !important;
-      }
-      .tile:hover,
-      .tile:focus-visible {
-        background: var(--surface-hover);
-        transform: translateY(-3px);
-        border-color: var(--tile-glow, var(--border));
-        box-shadow: 0 10px 28px -8px var(--tile-glow-shadow, transparent);
-      }
-      .tile:hover svg,
-      .tile:focus-visible svg,
-      .tile:hover img,
-      .tile:focus-visible img {
-        transform: scale(1.06);
-      }
-      .tile:active {
-        transform: translateY(-1px) scale(0.98);
-      }
-      .tile:focus-visible {
-        outline: none;
-      }
-      .tile[data-glow="teal"] {
-        --tile-glow: rgba(95, 168, 160, 0.55);
-        --tile-glow-shadow: rgba(95, 168, 160, 0.25);
-      }
-      .tile[data-glow="plum"] {
-        --tile-glow: rgba(145, 130, 179, 0.55);
-        --tile-glow-shadow: rgba(145, 130, 179, 0.25);
-      }
-      .tile[data-glow="rust"] {
-        --tile-glow: rgba(193, 129, 90, 0.55);
-        --tile-glow-shadow: rgba(193, 129, 90, 0.25);
-      }
-      .tile[data-glow="gold"] {
-        --tile-glow: rgba(207, 174, 124, 0.55);
-        --tile-glow-shadow: rgba(207, 174, 124, 0.25);
-      }
-      .tile[data-glow="slate"] {
-        --tile-glow: rgba(124, 147, 173, 0.55);
-        --tile-glow-shadow: rgba(124, 147, 173, 0.25);
-      }
-      .tile[data-glow="rose"] {
-        --tile-glow: rgba(186, 122, 140, 0.55);
-        --tile-glow-shadow: rgba(186, 122, 140, 0.25);
-      }
-      .tile[data-glow="sage"] {
-        --tile-glow: rgba(140, 168, 120, 0.55);
-        --tile-glow-shadow: rgba(140, 168, 120, 0.25);
-      }
-      .tile[data-glow="sky"] {
-        --tile-glow: rgba(118, 158, 196, 0.55);
-        --tile-glow-shadow: rgba(118, 158, 196, 0.25);
-      }
-      .tile .fallback-label {
-        font-family: "Inter", sans-serif;
-        font-weight: 600;
-        letter-spacing: 0.01em;
-        color: var(--tile-glow, var(--text-dim));
-        text-align: center;
-        padding: 0 8px;
-        line-height: 1.2rem;
-        user-select: none;
-      }
-      .shortcut-key {
-        color: var(--text-dim);
-        border: 1px solid var(--border);
-        width: 1.2rem;
-        height: 1.2;
-        text-align: center;
-        border-radius: 4px;
-        font-family: monospace;
-        position: absolute;
-        bottom: 0.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-      }
+          transparent);
+      margin: 44px 0 40px;
+    }
 
-      .weather-widget {
-        grid-column: span 2;
-        grid-row: span 2;
-        border-radius: var(--tile-radius, 20px);
-        background: var(--surface, rgba(255, 255, 255, 0.045));
-        border: 1px solid var(--border, rgba(255, 255, 255, 0.09));
-        backdrop-filter: blur(18px) saturate(140%);
-        -webkit-backdrop-filter: blur(18px) saturate(140%);
-        padding: 22px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        text-align: center;
-        font-family: "Inter", sans-serif;
-      }
-      .weather-main {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .weather-icon svg {
-        width: 44px;
-        height: 44px;
-        stroke: var(--sky, #769ec4);
-      }
-      .weather-temp {
-        font-family: "Space Grotesk", sans-serif;
-        font-weight: 300;
-        font-size: 2.6rem;
-        color: var(--text, #e9e7e1);
-        font-variant-numeric: tabular-nums;
-      }
-      .weather-location {
-        font-size: 0.85rem;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        color: var(--text, #e9e7e1);
-      }
-      .weather-meta {
-        font-size: 0.7rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--text-dim, #9a9ca6);
-        display: flex;
-        gap: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="bg"></div>
-    <div class="wrap">
-      <div class="clock" id="clock">--<span class="colon">:</span>--</div>
-      <div class="date" id="date"></div>
-      <div class="divider"></div>
-      <input class="search" type="text" placeholder="/search" />
-      <div class="grid"></div>
-      <div class="grid">
-        <div class="weather-widget" id="weatherWidget">
-          <div class="weather-main">
-            <div class="weather-icon" id="weatherIcon"></div>
-            <div class="weather-temp" id="weatherTemp">--°</div>
-          </div>
-          <div class="weather-location" id="weatherLocation">Locating…</div>
-          <div class="weather-meta">
-            <span id="weatherCondition">--</span>
-            <span id="weatherRange">H -- · L --</span>
-          </div>
+    .search {
+      padding: 0 1rem;
+      min-width: 36rem;
+      border-radius: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: white;
+      font-size: 1.4rem;
+      line-height: 3rem;
+    }
+
+    .search:focus {
+      outline: none;
+      border-color: rgba(193, 129, 90, 0.55);
+      box-shadow: 0 10px 28px -8px rgba(193, 129, 90, 0.25);
+    }
+
+    .grid {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      width: 100%;
+    }
+
+    .tile {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      cursor: pointer;
+      text-decoration: none;
+      transition:
+        transform 0.22s ease,
+        background 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+    }
+
+    .tile svg,
+    .tile img {
+      width: 42%;
+      height: 42%;
+      transition: transform 0.22s ease;
+      filter: invert(0.1) saturate(0.8);
+    }
+
+    .invert {
+      filter: invert(1) !important;
+    }
+
+    .tile:hover,
+    .tile:focus-visible {
+      background: var(--surface-hover);
+      transform: translateY(-3px);
+      border-color: var(--tile-glow, var(--border));
+      box-shadow: 0 10px 28px -8px var(--tile-glow-shadow, transparent);
+    }
+
+    .tile:hover svg,
+    .tile:focus-visible svg,
+    .tile:hover img,
+    .tile:focus-visible img {
+      transform: scale(1.06);
+    }
+
+    .tile:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .tile:focus-visible {
+      outline: none;
+    }
+
+    .tile[data-glow="teal"] {
+      --tile-glow: rgba(95, 168, 160, 0.55);
+      --tile-glow-shadow: rgba(95, 168, 160, 0.25);
+    }
+
+    .tile[data-glow="plum"] {
+      --tile-glow: rgba(145, 130, 179, 0.55);
+      --tile-glow-shadow: rgba(145, 130, 179, 0.25);
+    }
+
+    .tile[data-glow="rust"] {
+      --tile-glow: rgba(193, 129, 90, 0.55);
+      --tile-glow-shadow: rgba(193, 129, 90, 0.25);
+    }
+
+    .tile[data-glow="gold"] {
+      --tile-glow: rgba(207, 174, 124, 0.55);
+      --tile-glow-shadow: rgba(207, 174, 124, 0.25);
+    }
+
+    .tile[data-glow="slate"] {
+      --tile-glow: rgba(124, 147, 173, 0.55);
+      --tile-glow-shadow: rgba(124, 147, 173, 0.25);
+    }
+
+    .tile[data-glow="rose"] {
+      --tile-glow: rgba(186, 122, 140, 0.55);
+      --tile-glow-shadow: rgba(186, 122, 140, 0.25);
+    }
+
+    .tile[data-glow="sage"] {
+      --tile-glow: rgba(140, 168, 120, 0.55);
+      --tile-glow-shadow: rgba(140, 168, 120, 0.25);
+    }
+
+    .tile[data-glow="sky"] {
+      --tile-glow: rgba(118, 158, 196, 0.55);
+      --tile-glow-shadow: rgba(118, 158, 196, 0.25);
+    }
+
+    .tile .fallback-label {
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--tile-glow, var(--text-dim));
+      text-align: center;
+      padding: 0 8px;
+      line-height: 1.2rem;
+      user-select: none;
+    }
+
+    .shortcut-key {
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      width: 1.2rem;
+      height: 1.2;
+      text-align: center;
+      border-radius: 4px;
+      font-family: monospace;
+      position: absolute;
+      bottom: 0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+
+
+    /* WEATHER WIDGET */
+    .weather-widget {
+      grid-column: span 2;
+      grid-row: span 2;
+      border-radius: var(--tile-radius, 20px);
+      background: var(--surface, rgba(255, 255, 255, 0.045));
+      border: 1px solid var(--border, rgba(255, 255, 255, 0.09));
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-align: center;
+      font-family: "Inter", sans-serif;
+    }
+
+    .weather-main {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .weather-icon svg {
+      width: 44px;
+      height: 44px;
+      stroke: var(--sky, #769ec4);
+    }
+
+    .weather-temp {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 300;
+      font-size: 2.6rem;
+      color: var(--text, #e9e7e1);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .weather-location {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text, #e9e7e1);
+    }
+
+    .weather-meta {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim, #9a9ca6);
+      display: flex;
+      gap: 10px;
+    }
+
+
+    /* MUSIC WIDGET */
+
+    .lofi-widget {
+      grid-column: span 3;
+      grid-row: span 2;
+      border-radius: var(--tile-radius, 20px);
+      background: var(--surface, rgba(255, 255, 255, 0.045));
+      border: 1px solid var(--border, rgba(255, 255, 255, 0.09));
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+    }
+
+    .lofi-play {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid var(--border, rgba(255, 255, 255, 0.09));
+      background: var(--teal, #5fa8a0);
+      color: #0a0c11;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .lofi-play svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .lofi-play:hover {
+      transform: scale(1.06);
+      filter: brightness(1.08);
+    }
+
+    .lofi-play:active {
+      transform: scale(0.97);
+    }
+
+    .lofi-station {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text, #e9e7e1);
+    }
+
+    .lofi-desc {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-dim, #9a9ca6);
+      margin-top: 2px;
+    }
+
+    .lofi-stations {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .lofi-pill {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border, rgba(255, 255, 255, 0.09));
+      background: transparent;
+      color: var(--text-dim, #9a9ca6);
+      cursor: pointer;
+      transition: border-color 0.18s ease, color 0.18s ease;
+    }
+
+    .lofi-pill:hover {
+      color: var(--text, #e9e7e1);
+    }
+
+    .lofi-pill.active {
+      border-color: var(--teal, #5fa8a0);
+      color: var(--teal, #5fa8a0);
+    }
+
+    .lofi-volume-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      max-width: 160px;
+    }
+
+    .lofi-vol-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--text-dim, #9a9ca6);
+      flex-shrink: 0;
+    }
+
+    .lofi-volume {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--border, rgba(255, 255, 255, 0.09));
+      outline: none;
+    }
+
+    .lofi-volume::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--teal, #5fa8a0);
+      cursor: pointer;
+    }
+
+    .lofi-volume::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border: none;
+      border-radius: 50%;
+      background: var(--teal, #5fa8a0);
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="wrap">
+    <div class="clock" id="clock">--<span class="colon">:</span>--</div>
+    <div class="date" id="date"></div>
+    <div class="divider"></div>
+    <input class="search" type="text" placeholder="/search" />
+    <div class="grid"></div>
+    <div class="grid">
+      <div class="lofi-widget" id="lofiWidget">
+        <audio id="lofiAudio" preload="none"></audio>
+
+        <button class="lofi-play" id="lofiPlay" aria-label="Play">
+          <svg id="lofiPlayIcon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5.5v13l11-6.5-11-6.5Z" />
+          </svg>
+        </button>
+
+        <div class="lofi-info">
+          <div class="lofi-station" id="lofiStationName">—</div>
+          <div class="lofi-desc" id="lofiStationDesc">—</div>
+        </div>
+
+        <div class="lofi-stations" id="lofiStations"></div>
+
+        <div class="lofi-volume-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+            class="lofi-vol-icon">
+            <path d="M4 10v4h3l4 3V7l-4 3H4Z" />
+            <path d="M16 9a4 4 0 0 1 0 6" />
+          </svg>
+          <input type="range" id="lofiVolume" min="0" max="100" value="60" class="lofi-volume">
+        </div>
+      </div>
+
+      <div class="weather-widget" id="weatherWidget">
+        <div class="weather-main">
+          <div class="weather-icon" id="weatherIcon"></div>
+          <div class="weather-temp" id="weatherTemp">--°</div>
+        </div>
+        <div class="weather-location" id="weatherLocation">Locating…</div>
+        <div class="weather-meta">
+          <span id="weatherCondition">--</span>
+          <span id="weatherRange">H -- · L --</span>
         </div>
       </div>
     </div>
+  </div>
 
-    <script>
-      // icons from https://icon-sets.iconify.design/thesvg-color/
-      const LINKS = [
-        {
-          url: "https://notion.so",
-          title: "Notion",
-          icon: "notion",
-          color: "slate",
-          shortcut: "n",
-        },
-        {
-          url: "https://github.com",
-          title: "GitHub",
-          icon: "github-dark",
-          color: "slate",
-          shortcut: "g",
-        },
-        {
-          url: "https://pinterest.com",
-          title: "Pinterest",
-          icon: "pinterest",
-          color: "rose",
-          shortcut: "p",
-        },
-        {
-          url: "https://youtube.com",
-          title: "YouTube",
-          icon: "youtube",
-          color: "rose",
-          shortcut: "y",
-        },
-        {
-          url: "https://reddit.com",
-          title: "Reddit",
-          icon: "reddit",
-          color: "rust",
-          shortcut: "r",
-        },
-        {
-          url: "https://claude.ai",
-          title: "Claude",
-          icon: "claude",
-          color: "rust",
-          shortcut: "c",
-        },
-        {
-          url: "https://chatgpt.com",
-          title: "ChatGPT",
-          icon: "openai-chatgpt",
-          color: "sky",
-          iconClass: "invert",
-          shortcut: "h",
-        },
-        {
-          url: "https://web.whatsapp.com",
-          title: "WhatsApp",
-          icon: "whatsapp",
-          color: "sage",
-          shortcut: "w",
-        },
-      ];
+  <script>
+    // icons from https://icon-sets.iconify.design/thesvg-color/
+    const LINKS = [
+      {
+        url: "https://notion.so",
+        title: "Notion",
+        icon: "notion",
+        color: "slate",
+        shortcut: "n",
+      },
+      {
+        url: "https://github.com",
+        title: "GitHub",
+        icon: "github-dark",
+        color: "slate",
+        shortcut: "g",
+      },
+      {
+        url: "https://pinterest.com",
+        title: "Pinterest",
+        icon: "pinterest",
+        color: "rose",
+        shortcut: "p",
+      },
+      {
+        url: "https://youtube.com",
+        title: "YouTube",
+        icon: "youtube",
+        color: "rose",
+        shortcut: "y",
+      },
+      {
+        url: "https://reddit.com",
+        title: "Reddit",
+        icon: "reddit",
+        color: "rust",
+        shortcut: "r",
+      },
+      {
+        url: "https://claude.ai",
+        title: "Claude",
+        icon: "claude",
+        color: "rust",
+        shortcut: "c",
+      },
+      {
+        url: "https://chatgpt.com",
+        title: "ChatGPT",
+        icon: "openai-chatgpt",
+        color: "sky",
+        iconClass: "invert",
+        shortcut: "h",
+      },
+      {
+        url: "https://web.whatsapp.com",
+        title: "WhatsApp",
+        icon: "whatsapp",
+        color: "sage",
+        shortcut: "w",
+      },
+    ];
 
-      const isFocusedOnInputElement = () =>
-        ["input", "textarea", "select"].includes(
-          document.activeElement?.tagName.toLowerCase(),
-        );
+    const isFocusedOnInputElement = () =>
+      ["input", "textarea", "select"].includes(
+        document.activeElement?.tagName.toLowerCase(),
+      );
 
-      const showShortcutKeys = (value) =>
-        document
-          .querySelectorAll(".shortcut-key")
-          .forEach((el) => (el.hidden = !value));
+    const showShortcutKeys = (value) =>
+      document
+        .querySelectorAll(".shortcut-key")
+        .forEach((el) => (el.hidden = !value));
 
-      const tick = () => {
-        const now = new Date();
-        let hours = now.getHours() % 12;
-        if (hours === 0) hours = 12;
-        const h = hours.toString().padStart(2, "0");
-        const m = now.getMinutes().toString().padStart(2, "0");
-        document.getElementById("clock").innerHTML =
-          h + '<span class="colon">:</span>' + m;
-        const opts = { weekday: "long", month: "long", day: "numeric" };
-        document.getElementById("date").textContent = now.toLocaleDateString(
-          undefined,
-          opts,
-        );
-      };
+    const tick = () => {
+      const now = new Date();
+      let hours = now.getHours() % 12;
+      if (hours === 0) hours = 12;
+      const h = hours.toString().padStart(2, "0");
+      const m = now.getMinutes().toString().padStart(2, "0");
+      document.getElementById("clock").innerHTML =
+        h + '<span class="colon">:</span>' + m;
+      const opts = { weekday: "long", month: "long", day: "numeric" };
+      document.getElementById("date").textContent = now.toLocaleDateString(
+        undefined,
+        opts,
+      );
+    };
 
-      const onLoad = () => {
-        tick();
-        setInterval(tick, 1000);
+    const onLoad = () => {
+      tick();
+      setInterval(tick, 1000);
 
-        const searchbar = document.querySelector("input.search");
+      const searchbar = document.querySelector("input.search");
 
-        document.querySelector(".grid").innerHTML = LINKS.reduce(
-          (acc, link) => {
-            acc += `
+      document.querySelector(".grid").innerHTML = LINKS.reduce(
+        (acc, link) => {
+          acc += `
                 <a class="tile" data-glow="${link.color}" href="${link.url}" aria-label="${link.title}" title="${link.title}">
                     <img src="https://api.iconify.design/thesvg-color/${link.icon}.svg" alt="${link.icon} icon" ${link.iconClass ? `class="${link.iconClass}"` : ""} loading="lazy">
                     <span class="fallback-label" hidden>${link.title}</span>
                     ${link.shortcut ? `<div class="shortcut-key" hidden>${link.shortcut}</div>` : ""}
                 </a>
             `;
-            return acc;
-          },
-          "",
-        );
+          return acc;
+        },
+        "",
+      );
 
-        document.querySelectorAll(".tile img").forEach((img) => {
-          const label = img.closest(".tile").querySelector(".fallback-label");
-          img.addEventListener("error", () => {
-            img.hidden = true;
-            if (label) label.hidden = false;
-          });
-
-          img.addEventListener("load", () => {
-            img.hidden = false;
-            if (label) label.hidden = true;
-          });
+      document.querySelectorAll(".tile img").forEach((img) => {
+        const label = img.closest(".tile").querySelector(".fallback-label");
+        img.addEventListener("error", () => {
+          img.hidden = true;
+          if (label) label.hidden = false;
         });
 
-        document.addEventListener("keydown", (e) => {
-          if (!isFocusedOnInputElement()) {
-            if (e.key === "Alt") {
-              showShortcutKeys(true);
-            } else if (e.key === "/" && searchbar) {
-              e.preventDefault();
-              searchbar.select();
-            } else {
-              LINKS.forEach((link) => {
-                if (link.shortcut && link.shortcut === e.key && e.altKey) {
-                  window.location = link.url;
-                }
-              });
-            }
-          }
+        img.addEventListener("load", () => {
+          img.hidden = false;
+          if (label) label.hidden = true;
         });
-
-        searchbar.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") {
-            searchbar.value = searchbar.value.trim();
-            if (searchbar.value !== "") {
-              window.location = `https://search.brave.com/search?q=${encodeURIComponent(searchbar.value)}`;
-            }
-          }
-          if (e.key === "Escape") {
-            searchbar.blur();
-          }
-        });
-
-        document.addEventListener("keyup", (e) => {
-          if (!isFocusedOnInputElement()) {
-            if (e.key === "Alt") {
-              showShortcutKeys(false);
-            }
-          }
-        });
-      };
-
-      window.addEventListener("load", onLoad);
-      window.addEventListener("blur", () => {
-        showShortcutKeys(false);
       });
 
-      // WEATHER
-      (function () {
-        const DEFAULT_LOCATION = { lat: 51.5074, lon: -0.1278, name: "London" };
-        const UNIT = "celsius";
-
-        const ICONS = {
-          sun: '<circle cx="12" cy="12" r="4.5" fill="none" stroke-width="1.6"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-width="1.6" stroke-linecap="round"/>',
-          cloud:
-            '<path d="M6.5 18a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.7-1.7A4.2 4.2 0 0 1 17 18H6.5Z" fill="none" stroke-width="1.6" stroke-linejoin="round"/>',
-          rain: '<path d="M6.5 14a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.7-1.7A4.2 4.2 0 0 1 17 14H6.5Z" fill="none" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3" stroke-width="1.6" stroke-linecap="round"/>',
-          snow: '<path d="M6.5 14a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.7-1.7A4.2 4.2 0 0 1 17 14H6.5Z" fill="none" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="19" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="20.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="16" cy="19" r="0.9" fill="currentColor" stroke="none"/>',
-          storm:
-            '<path d="M6.5 13a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.7-1.7A4.2 4.2 0 0 1 17 13H6.5Z" fill="none" stroke-width="1.6" stroke-linejoin="round"/><path d="M12.5 14l-2.5 4h2.5l-1.5 4 4-5h-2.5l2-3z" stroke-width="1.2" stroke-linejoin="round"/>',
-          fog: '<path d="M4 10h16M4 14h16M6 18h12" stroke-width="1.6" stroke-linecap="round"/>',
-        };
-
-        function iconAndLabel(code) {
-          if (code === 0) return { icon: ICONS.sun, label: "Clear" };
-          if ([1, 2].includes(code))
-            return { icon: ICONS.sun, label: "Partly cloudy" };
-          if (code === 3) return { icon: ICONS.cloud, label: "Overcast" };
-          if ([45, 48].includes(code)) return { icon: ICONS.fog, label: "Fog" };
-          if ([51, 53, 55, 56, 57].includes(code))
-            return { icon: ICONS.rain, label: "Drizzle" };
-          if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code))
-            return { icon: ICONS.rain, label: "Rain" };
-          if ([71, 73, 75, 77, 85, 86].includes(code))
-            return { icon: ICONS.snow, label: "Snow" };
-          if ([95, 96, 99].includes(code))
-            return { icon: ICONS.storm, label: "Thunderstorm" };
-          return { icon: ICONS.cloud, label: "—" };
-        }
-
-        function svgWrap(inner) {
-          return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round">${inner}</svg>`;
-        }
-
-        async function loadWeather(lat, lon, place) {
-          try {
-            const unitParam =
-              UNIT === "fahrenheit" ? "&temperature_unit=fahrenheit" : "";
-            const res = await fetch(
-              `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto${unitParam}`,
-            );
-            const data = await res.json();
-            const temp = Math.round(data.current.temperature_2m);
-            const hi = Math.round(data.daily.temperature_2m_max[0]);
-            const lo = Math.round(data.daily.temperature_2m_min[0]);
-            const { icon, label } = iconAndLabel(data.current.weather_code);
-            const deg = UNIT === "fahrenheit" ? "°F" : "°C";
-
-            document.getElementById("weatherIcon").innerHTML = svgWrap(icon);
-            document.getElementById("weatherTemp").textContent = `${temp}°`;
-            document.getElementById("weatherLocation").textContent = place;
-            document.getElementById("weatherCondition").textContent = label;
-            document.getElementById("weatherRange").textContent =
-              `H ${hi}${deg} · L ${lo}${deg}`;
-          } catch (e) {
-            document.getElementById("weatherLocation").textContent =
-              "Weather unavailable";
-            document.getElementById("weatherTemp").textContent = "--°";
+      document.addEventListener("keydown", (e) => {
+        if (!isFocusedOnInputElement()) {
+          if (e.key === "Alt") {
+            showShortcutKeys(true);
+          } else if (e.key === "/" && searchbar) {
+            e.preventDefault();
+            searchbar.select();
+          } else {
+            LINKS.forEach((link) => {
+              if (link.shortcut && link.shortcut === e.key && e.altKey) {
+                window.location = link.url;
+              }
+            });
           }
         }
+      });
 
-        async function reverseGeocode(lat, lon, fallback) {
-          try {
-            const res = await fetch(
-              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`,
-            );
-            const data = await res.json();
-            return data.city || data.locality || fallback;
-          } catch (e) {
-            return fallback;
+      searchbar.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          searchbar.value = searchbar.value.trim();
+          if (searchbar.value !== "") {
+            window.location = `https://search.brave.com/search?q=${encodeURIComponent(searchbar.value)}`;
           }
         }
-
-        function init(lat, lon, fallbackName) {
-          reverseGeocode(lat, lon, fallbackName).then((place) =>
-            loadWeather(lat, lon, place),
-          );
+        if (e.key === "Escape") {
+          searchbar.blur();
         }
+      });
 
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (pos) =>
-              init(pos.coords.latitude, pos.coords.longitude, "Your location"),
-            () =>
-              init(
-                DEFAULT_LOCATION.lat,
-                DEFAULT_LOCATION.lon,
-                DEFAULT_LOCATION.name,
-              ),
-            { timeout: 5000 },
+      document.addEventListener("keyup", (e) => {
+        if (!isFocusedOnInputElement()) {
+          if (e.key === "Alt") {
+            showShortcutKeys(false);
+          }
+        }
+      });
+    };
+
+    window.addEventListener("load", onLoad);
+    window.addEventListener("blur", () => {
+      showShortcutKeys(false);
+    });
+
+    // WEATHER
+    (function () {
+      const DEFAULT_LOCATION = { lat: 51.5074, lon: -0.1278, name: "London" };
+      const UNIT = "celsius";
+
+      const ICONS = {
+        sun: '<circle cx="12" cy="12" r="4.5" fill="none" stroke-width="1.6"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-width="1.6" stroke-linecap="round"/>',
+        cloud:
+          '<path d="M6.5 18a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.7-1.7A4.2 4.2 0 0 1 17 18H6.5Z" fill="none" stroke-width="1.6" stroke-linejoin="round"/>',
+        rain: '<path d="M6.5 14a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.7-1.7A4.2 4.2 0 0 1 17 14H6.5Z" fill="none" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3" stroke-width="1.6" stroke-linecap="round"/>',
+        snow: '<path d="M6.5 14a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.7-1.7A4.2 4.2 0 0 1 17 14H6.5Z" fill="none" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="19" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="20.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="16" cy="19" r="0.9" fill="currentColor" stroke="none"/>',
+        storm:
+          '<path d="M6.5 13a4 4 0 0 1-.5-8 5.5 5.5 0 0 1 10.7-1.7A4.2 4.2 0 0 1 17 13H6.5Z" fill="none" stroke-width="1.6" stroke-linejoin="round"/><path d="M12.5 14l-2.5 4h2.5l-1.5 4 4-5h-2.5l2-3z" stroke-width="1.2" stroke-linejoin="round"/>',
+        fog: '<path d="M4 10h16M4 14h16M6 18h12" stroke-width="1.6" stroke-linecap="round"/>',
+      };
+
+      function iconAndLabel(code) {
+        if (code === 0) return { icon: ICONS.sun, label: "Clear" };
+        if ([1, 2].includes(code))
+          return { icon: ICONS.sun, label: "Partly cloudy" };
+        if (code === 3) return { icon: ICONS.cloud, label: "Overcast" };
+        if ([45, 48].includes(code)) return { icon: ICONS.fog, label: "Fog" };
+        if ([51, 53, 55, 56, 57].includes(code))
+          return { icon: ICONS.rain, label: "Drizzle" };
+        if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code))
+          return { icon: ICONS.rain, label: "Rain" };
+        if ([71, 73, 75, 77, 85, 86].includes(code))
+          return { icon: ICONS.snow, label: "Snow" };
+        if ([95, 96, 99].includes(code))
+          return { icon: ICONS.storm, label: "Thunderstorm" };
+        return { icon: ICONS.cloud, label: "—" };
+      }
+
+      function svgWrap(inner) {
+        return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round">${inner}</svg>`;
+      }
+
+      async function loadWeather(lat, lon, place) {
+        try {
+          const unitParam =
+            UNIT === "fahrenheit" ? "&temperature_unit=fahrenheit" : "";
+          const res = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto${unitParam}`,
           );
+          const data = await res.json();
+          const temp = Math.round(data.current.temperature_2m);
+          const hi = Math.round(data.daily.temperature_2m_max[0]);
+          const lo = Math.round(data.daily.temperature_2m_min[0]);
+          const { icon, label } = iconAndLabel(data.current.weather_code);
+          const deg = UNIT === "fahrenheit" ? "°F" : "°C";
+
+          document.getElementById("weatherIcon").innerHTML = svgWrap(icon);
+          document.getElementById("weatherTemp").textContent = `${temp}°`;
+          document.getElementById("weatherLocation").textContent = place;
+          document.getElementById("weatherCondition").textContent = label;
+          document.getElementById("weatherRange").textContent =
+            `H ${hi}${deg} · L ${lo}${deg}`;
+        } catch (e) {
+          document.getElementById("weatherLocation").textContent =
+            "Weather unavailable";
+          document.getElementById("weatherTemp").textContent = "--°";
+        }
+      }
+
+      async function reverseGeocode(lat, lon, fallback) {
+        try {
+          const res = await fetch(
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`,
+          );
+          const data = await res.json();
+          return data.city || data.locality || fallback;
+        } catch (e) {
+          return fallback;
+        }
+      }
+
+      function init(lat, lon, fallbackName) {
+        reverseGeocode(lat, lon, fallbackName).then((place) =>
+          loadWeather(lat, lon, place),
+        );
+      }
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) =>
+            init(pos.coords.latitude, pos.coords.longitude, "Your location"),
+          () =>
+            init(
+              DEFAULT_LOCATION.lat,
+              DEFAULT_LOCATION.lon,
+              DEFAULT_LOCATION.name,
+            ),
+          { timeout: 5000 },
+        );
+      } else {
+        init(
+          DEFAULT_LOCATION.lat,
+          DEFAULT_LOCATION.lon,
+          DEFAULT_LOCATION.name,
+        );
+      }
+    })();
+
+    // MUSIC
+    (function () {
+      const STATIONS = [
+        { name: "Groove Salad", desc: "Chillout & downtempo", url: "https://ice1.somafm.com/groovesalad-128-mp3" },
+        { name: "Beat Blender", desc: "Deep house & chill", url: "https://ice1.somafm.com/beatblender-128-mp3" },
+        { name: "Drone Zone", desc: "Ambient, no beat", url: "https://ice1.somafm.com/dronezone-128-mp3" }
+      ];
+
+      const STORAGE_KEY = "lofi-widget-state";
+      const audio = document.getElementById("lofiAudio");
+      const playBtn = document.getElementById("lofiPlay");
+      const playIcon = document.getElementById("lofiPlayIcon");
+      const nameEl = document.getElementById("lofiStationName");
+      const descEl = document.getElementById("lofiStationDesc");
+      const stationsEl = document.getElementById("lofiStations");
+      const volumeEl = document.getElementById("lofiVolume");
+
+      const ICON_PLAY = '<path d="M8 5.5v13l11-6.5-11-6.5Z"/>';
+      const ICON_PAUSE = '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>';
+
+      let saved = {};
+      try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch (e) { }
+      let current = Number.isInteger(saved.stationIndex) ? saved.stationIndex : 0;
+      let isPlaying = false;
+
+      function persist() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          stationIndex: current,
+          volume: volumeEl.value
+        }));
+      }
+
+      function renderPills() {
+        stationsEl.innerHTML = "";
+        STATIONS.forEach((s, i) => {
+          const pill = document.createElement("button");
+          pill.className = "lofi-pill" + (i === current ? " active" : "");
+          pill.textContent = s.name;
+          pill.addEventListener("click", () => selectStation(i));
+          stationsEl.appendChild(pill);
+        });
+      }
+
+      function selectStation(i) {
+        const wasPlaying = isPlaying;
+        current = i;
+        const s = STATIONS[current];
+        nameEl.textContent = s.name;
+        descEl.textContent = s.desc;
+        audio.src = s.url;
+        renderPills();
+        persist();
+        if (wasPlaying) audio.play().catch(() => { });
+      }
+
+      function setPlaying(playing) {
+        isPlaying = playing;
+        playIcon.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
+        playBtn.setAttribute("aria-label", playing ? "Pause" : "Play");
+      }
+
+      playBtn.addEventListener("click", () => {
+        if (!audio.src) selectStation(current);
+        if (isPlaying) {
+          audio.pause();
+          setPlaying(false);
         } else {
-          init(
-            DEFAULT_LOCATION.lat,
-            DEFAULT_LOCATION.lon,
-            DEFAULT_LOCATION.name,
-          );
+          audio.play().then(() => setPlaying(true)).catch(() => {
+            descEl.textContent = "Stream unavailable";
+          });
         }
-      })();
-    </script>
-  </body>
+      });
+
+      audio.addEventListener("error", () => {
+        descEl.textContent = "Stream unavailable";
+        setPlaying(false);
+      });
+
+      volumeEl.addEventListener("input", () => {
+        audio.volume = volumeEl.value / 100;
+        persist();
+      });
+
+      // init
+      audio.volume = (saved.volume !== undefined ? saved.volume : volumeEl.value) / 100;
+      volumeEl.value = saved.volume !== undefined ? saved.volume : volumeEl.value;
+      nameEl.textContent = STATIONS[current].name;
+      descEl.textContent = STATIONS[current].desc;
+      renderPills();
+    })();
+  </script>
+</body>
+
 </html>
