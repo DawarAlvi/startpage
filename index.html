@@ -496,45 +496,6 @@
     <div class="divider"></div>
     <input class="search" type="text" placeholder="/search" />
     <div class="grid"></div>
-    <div class="grid">
-      <div class="lofi-widget" id="lofiWidget" hidden>
-        <audio id="lofiAudio" preload="none"></audio>
-
-        <button class="lofi-play" id="lofiPlay" aria-label="Play">
-          <svg id="lofiPlayIcon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8 5.5v13l11-6.5-11-6.5Z" />
-          </svg>
-        </button>
-
-        <div class="lofi-info">
-          <div class="lofi-station" id="lofiStationName">—</div>
-          <div class="lofi-desc" id="lofiStationDesc">—</div>
-        </div>
-
-        <div class="lofi-stations" id="lofiStations"></div>
-
-        <div class="lofi-volume-row">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-            class="lofi-vol-icon">
-            <path d="M4 10v4h3l4 3V7l-4 3H4Z" />
-            <path d="M16 9a4 4 0 0 1 0 6" />
-          </svg>
-          <input type="range" id="lofiVolume" min="0" max="100" value="60" class="lofi-volume">
-        </div>
-      </div>
-
-      <div class="weather-widget" id="weatherWidget" hidden>
-        <div class="weather-main">
-          <div class="weather-icon" id="weatherIcon"></div>
-          <div class="weather-temp" id="weatherTemp">--°</div>
-        </div>
-        <div class="weather-location" id="weatherLocation">Locating…</div>
-        <div class="weather-meta">
-          <span id="weatherCondition">--</span>
-          <span id="weatherRange">H -- · L --</span>
-        </div>
-      </div>
-    </div>
   </div>
 
   <script>
